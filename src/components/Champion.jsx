@@ -1,10 +1,10 @@
 import { Card, CardBody, CardHeader, Image } from "grommet";
 
-const Champion = ({champion}) => {
+const Champion = ({ champion }) => {
   return (
   <>
-    <Card>
-      <CardHeader>{champion.node.champion_name}</CardHeader>
+    <Card animation={{ type: "fadeIn", delay: 500}}>
+      <CardHeader pad="small" alignSelf="center">{champion.node.champion_name}</CardHeader>
       <CardBody>
         <Image alt={champion.node.champion_name} src={champion.node.champion_splash} />
       </CardBody>
