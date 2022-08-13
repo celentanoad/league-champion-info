@@ -1,23 +1,34 @@
-import logo from './logo.svg';
+import { useState } from 'react';
+import {baseURL, options} from './services';
 import './App.css';
+import Search from './components/Search';
+import ChampionList from './components/ChampionList';
 
 function App() {
+
+  const [championList, setChampionList] = useState(null);
+
+  const getChampionList = async (difficulty, role) => {
+    let results = await fetch(`${baseURL}&role=${role}`, options)
+      .then(res => res.json())
+      .catch(err => console.error(err))
+      // still need to test catch block
+    // filter results based on difficulty
+    setChampionList(results.champions)
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+      <header>
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          League of Legends Champion Finder
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
       </header>
+      <h1>
+        Search for a Champion
+      </h1>
+      <Search getChampionList={getChampionList}/>
+      {championList && <ChampionList championList={championList}/>}
     </div>
   );
 }
