@@ -4,6 +4,7 @@ import './App.css';
 import { Grommet, Box } from 'grommet';
 import Search from './components/Search';
 import ChampionList from './components/ChampionList';
+import theme from './theme'
 
 const jsonResponse = [
   {node : {
@@ -83,14 +84,14 @@ function App() {
   }
 
   return (
-    <Grommet plain>
+    <Grommet theme={theme} full>
       <Box pad="medium">
         <header>
           <p>
             League of Legends Champion Finder
           </p>
         </header>
-        <h1>
+        <h1 align="center">
           Search for a Champion
         </h1>
         <Box direction="column" align="center">

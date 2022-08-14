@@ -43,7 +43,7 @@ const Search = ({ getChampionList }) => {
 
   return ( 
     <>
-      <Box flex={true} direction="row-responsive" justify="center" alignContent="center" height="xsmall" gap="medium" pad="large">
+      <Box flex={true} direction="row" justify="center" alignContent="center" height="xsmall" gap="medium" pad="large">
         <Form onSubmit={handleSubmit}>
           <FormField label="Select Champion Difficulty" name="difficulty">
             <RadioButtonGroup 

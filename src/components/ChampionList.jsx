@@ -9,7 +9,7 @@ const ChampionList = ({championList}) => {
   return ( 
     <>
       <Box>
-        <Grid columns={size !== "small" ? "small" : "medium"} gap="large">
+        <Grid columns={size !== "small" ? "medium" : "large"} gap="large">
           {championList.map((champion, idx) => (
             <Champion champion={champion} key={idx} />
             ))}
