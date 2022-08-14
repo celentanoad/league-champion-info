@@ -93,8 +93,10 @@ function App() {
         <h1>
           Search for a Champion
         </h1>
-        <Search getChampionList={getChampionList}/>
-        {championList && <ChampionList championList={championList}/>}
+        <Box direction="column" align="center">
+          <Search getChampionList={getChampionList}/>
+          {championList && <ChampionList championList={championList}/>}
+        </Box>
       </Box>
     </Grommet>
   );
