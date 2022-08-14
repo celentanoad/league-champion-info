@@ -78,14 +78,15 @@ function App() {
     let results = await fetch(`${baseURL}&role=${role}`, options)
       .then(res => res.json())
       .catch(err => console.error(err))
-      // still need to test catch block
     // filter results based on difficulty
-    setChampionList(results.champions)
+    // eslint-disable-next-line eqeqeq
+    let champions = results.champions.filter(champion => champion.node.difficulty == difficulty)
+    setChampionList(champions)
   }
 
   return (
     <Grommet theme={theme} full>
-      <Box pad="medium">
+      <Box pad="medium" background="dark-1">
         <header>
           <p>
             League of Legends Champion Finder
