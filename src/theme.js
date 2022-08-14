@@ -49,7 +49,7 @@ const theme = {
       "light-6": "#DADADA",
       "neutral-1": "#425563",
       "neutral-2": "#5F7A76",
-      "neutral-3": "#80746E",
+      "neutral-3": "#2E3B44",
       "neutral-4": "#767676",
       "status-critical": "#F04953",
       "status-error": "#F04953",

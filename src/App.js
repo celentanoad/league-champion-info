@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import {baseURL, options} from './services';
 import './App.css';
-import { Grommet, Box } from 'grommet';
+import { Grommet, Box, Spinner, Header, Heading, Image } from 'grommet';
 import Search from './components/Search';
 import ChampionList from './components/ChampionList';
+import ErrorMessage from './components/ErrorMessage';
 import theme from './theme'
+import logo from './assets/logoHeader.png'
 
 const jsonResponse = [
   {node : {
@@ -71,33 +73,56 @@ const jsonResponse = [
 
 function App() {
 
-  const [championList, setChampionList] = useState(jsonResponse);
+  const [championList, setChampionList] = useState();
+  const [isLoading, setIsLoading] = useState(false);
+  // const [hasError, setHasError] = useState(false);
 
+  const getDifficultyRange = (difficulty) => {
+    if (difficulty === "easy") return [1, 3];
+    else if (difficulty === "medium") return [4, 6];
+    else return [7, 10];
+  }
 
   const getChampionList = async (difficulty, role) => {
+    // setHasError(false)
+    setIsLoading(true)
+    setChampionList()
     let results = await fetch(`${baseURL}&role=${role}`, options)
       .then(res => res.json())
-      .catch(err => console.error(err))
-    // filter results based on difficulty
-    // eslint-disable-next-line eqeqeq
-    let champions = results.champions.filter(champion => champion.node.difficulty == difficulty)
-    setChampionList(champions)
+      //   {
+      //   res.json()
+      //   if (!res.ok) return Promise.reject(res.status)
+      // })
+      let difficultyRange = getDifficultyRange(difficulty)
+      let champions = results.champions.filter(
+        champion => champion.node.difficulty >= difficultyRange[0] && champion.node.difficulty <= difficultyRange[1]
+      )
+      setChampionList(champions)
+      setIsLoading(false)
+      .catch(err => {
+        console.error(err)
+        // setHasError(true)
+        // setIsLoading(false)
+      })
   }
 
   return (
-    <Grommet theme={theme} full>
-      <Box pad="medium" background="dark-1">
-        <header>
-          <p>
-            League of Legends Champion Finder
-          </p>
-        </header>
-        <h1 align="center">
+    <Grommet theme={theme} background="neutral-3" full>
+      <Header flex={true} pad="small" justify="around" background="light-4">
+        <Box width="small">
+          <Image fill={true} alt="League of Legends Logo" src={logo}/>
+        </Box>
+        <Heading level="1">Champion Finder</Heading>
+      </Header>
+      <Box pad="medium">
+        <Heading level="2" alignSelf="center" margin={{bottom: "none"}}>
           Search for a Champion
-        </h1>
+        </Heading>
         <Box direction="column" align="center">
           <Search getChampionList={getChampionList}/>
+          {isLoading && <Spinner />}
           {championList && <ChampionList championList={championList}/>}
+          {/* {hasError && <ErrorMessage />} */}
         </Box>
       </Box>
     </Grommet>
