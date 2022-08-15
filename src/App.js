@@ -97,7 +97,6 @@ function App() {
       .then(handleErrors)
       .then(res => res.json())
       .catch(err => {
-        console.error(err)
         setHasError(true)
         setIsLoading(false)
       })

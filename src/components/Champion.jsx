@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Card, CardHeader, Heading } from "grommet";
+import { Card, CardHeader, Heading, CardBody } from "grommet";
 import ChampionDetails from "./ChampionDetails";
 import ChampionBasic from "./ChampionBasic";
 import { baseURLOne, options } from "../services";
@@ -8,12 +8,24 @@ const Champion = ({ champion }) => {
 
   const [showDetails, setShowDetails] = useState(false);
   const [championDetails, setChampionDetails] = useState("");
+  const [hasError, setHasError] = useState(false);
+
+  const handleErrors = (response) => {
+    if (!response.ok) throw Error(response.statusText)
+    return response;
+  }
 
   const getChampionDetails = async(championName) => {
+    setHasError(false)
     let formattedName = championName.replace(/'/,'-').replace(/ /, '-')
     let details = await fetch(`${baseURLOne}${formattedName}`, options)
+      .then(handleErrors)
       .then(res => res.json())
-    setChampionDetails(details.champion[0])
+      .catch(err => {
+        setHasError(true)
+      });
+
+    if (details) setChampionDetails(details.champion[0])
   }
 
   const handleClick = () => {
@@ -26,14 +38,16 @@ const Champion = ({ champion }) => {
 
   return (
   <>
-    <Card animation={{ type: "fadeIn", duration: 2000}} background="light-4" onClick={handleClick}>
+    <Card animation={{ type: "fadeIn", duration: 2000}} background="light-4" onClick={handleClick} >
       <CardHeader alignSelf="center">
         <Heading level="2" margin="small">
           {champion.node.champion_name}
         </Heading>
       </CardHeader>
-      {showDetails ? <ChampionDetails championLore={championDetails.lore} championTitle={championDetails.champion_title}/> 
-                  : <ChampionBasic champion={champion.node} />
+      {showDetails ? 
+        <ChampionDetails error={hasError} championLore={championDetails.lore} championTitle={championDetails.champion_title}/> 
+        : 
+        <ChampionBasic champion={champion.node} />
       } 
     </Card>
   </> );

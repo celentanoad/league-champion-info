@@ -1,11 +1,12 @@
 import { CardBody, Box, Heading, Text } from "grommet";
+import ErrorMessage from "./ErrorMessage";
 
-const ChampionDetails = ({championLore, championTitle}) => {
-
+const ChampionDetails = ({championLore, championTitle, error}) => {
 
   return ( 
-    <>
-       <CardBody margin="small" animation={{ type: "fadeIn", duration: 2000}} >
+    <> 
+      {error ? <ErrorMessage /> :
+      <CardBody margin="small" animation={{ type: "fadeIn", duration: 2000}} >
         <Box margin="none" align="center" animation={{type: "fadeIn", delay: 500, duration: 2000}}>
           <Heading margin={{bottom: "medium"}} level="3">{championTitle}</Heading>
         </Box>
@@ -14,6 +15,7 @@ const ChampionDetails = ({championLore, championTitle}) => {
           <Text margin="small">{championLore}</Text>
         </Box>
       </CardBody>
+      }
     </>
    );
 }

@@ -4,12 +4,12 @@ import { useContext } from "react";
 
 const ChampionList = ({championList}) => {
   
-  const size = useContext(ResponsiveContext);
+  const screenSize = useContext(ResponsiveContext);
 
   return ( 
     <>
       <Box pad="medium" margin="none">
-        <Grid columns={size !== "small" && championList.length > 1 ? "medium" : "large"} gap="xlarge">
+        <Grid columns={screenSize === "large"  ? {count: 2, size: 'auto'} : {count: 1, size: 'auto'}} gap="xlarge">
           {championList.map((champion, idx) => (
             <Champion champion={champion} key={idx} />
             ))}

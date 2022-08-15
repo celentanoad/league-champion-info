@@ -102,7 +102,7 @@ const theme = {
         }
       },
       "medium": {
-        "value": 1536
+        "value": 1220
       },
       "large": {}
     },
