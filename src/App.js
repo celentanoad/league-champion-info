@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import {baseURLAll, options, getAllChampions} from './services';
+import { baseURLAll, options } from './services';
 import './App.css';
 import { Grommet, Box, Spinner, Header, Heading, Image } from 'grommet';
 import Search from './components/Search';
@@ -7,7 +7,6 @@ import ChampionList from './components/ChampionList';
 import ErrorMessage from './components/ErrorMessage';
 import theme from './theme'
 import logo from './assets/logoHeader.png'
-// import apiHook from "./hooks/apiHook";
 
 const jsonResponse = [
   {node : {
@@ -90,24 +89,24 @@ function App() {
   }
 
   const getChampionList = async (difficulty, role) => {
-    setHasError(false)
-    setIsLoading(true)
-    setChampionList()
+    setHasError(false);
+    setIsLoading(true);
+    setChampionList(null);
     let results = await fetch(`${baseURLAll}${role}`, options)
       .then(handleErrors)
       .then(res => res.json())
       .catch(err => {
         setHasError(true)
         setIsLoading(false)
-      })
+      });
 
     if (results) {
-      let difficultyRange = getDifficultyRange(difficulty)
+      let difficultyRange = getDifficultyRange(difficulty);
       let champions = results.champions.filter(
         champion => champion.node.difficulty >= difficultyRange[0] && champion.node.difficulty <= difficultyRange[1]
-      )
-      setChampionList(champions)
-      setIsLoading(false)
+      );
+      setChampionList(champions);
+      setIsLoading(false);
     }
   }
 
