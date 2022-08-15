@@ -8,69 +8,6 @@ import ErrorMessage from './components/ErrorMessage';
 import theme from './theme'
 import logo from './assets/logoHeader.png'
 
-const jsonResponse = [
-  {node : {
-    champion_name: "Aatrox",
-    champion_splash: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Aatrox_0.jpg",
-    recommended_roles: ["Fighter", "Tank"],
-    difficulty: 4
-  }},
-  {node : {
-    champion_name: "Aatrox",
-    champion_splash: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Aatrox_0.jpg",
-    recommended_roles: ["Fighter", "Tank"],
-    difficulty: 4
-  }},
-  {node : {
-    champion_name: "Aatrox",
-    champion_splash: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Aatrox_0.jpg",
-    recommended_roles: ["Fighter", "Tank"],
-    difficulty: 4
-  }},
-  {node : {
-    champion_name: "Aatrox",
-    champion_splash: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Aatrox_0.jpg",
-    recommended_roles: ["Fighter", "Tank"],
-    difficulty: 4
-  }},
-  {node : {
-    champion_name: "Aatrox",
-    champion_splash: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Aatrox_0.jpg",
-    recommended_roles: ["Fighter", "Tank"],
-    difficulty: 4
-  }},
-  {node : {
-    champion_name: "Aatrox",
-    champion_splash: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Aatrox_0.jpg",
-    recommended_roles: ["Fighter", "Tank"],
-    difficulty: 4
-  }},
-  {node : {
-    champion_name: "Aatrox",
-    champion_splash: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Aatrox_0.jpg",
-    recommended_roles: ["Fighter", "Tank"],
-    difficulty: 4
-  }},
-  {node : {
-    champion_name: "Aatrox",
-    champion_splash: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Aatrox_0.jpg",
-    recommended_roles: ["Fighter", "Tank"],
-    difficulty: 4
-  }},
-  {node : {
-    champion_name: "Aatrox",
-    champion_splash: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Aatrox_0.jpg",
-    recommended_roles: ["Fighter", "Tank"],
-    difficulty: 4
-  }},
-  {node : {
-    champion_name: "Aatrox",
-    champion_splash: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Aatrox_0.jpg",
-    recommended_roles: ["Fighter", "Tank"],
-    difficulty: 4
-  }}
-]
-
 function App() {
 
   const [championList, setChampionList] = useState(null);
