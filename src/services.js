@@ -1,4 +1,5 @@
-export const baseURL = 'https://league-of-legends-champions.p.rapidapi.com/champions/en-us?page=0&size=10';
+export const baseURLAll = 'https://league-of-legends-champions.p.rapidapi.com/champions/en-us?page=1&size=100';
+export const baseURLOne = 'https://league-of-legends-champions.p.rapidapi.com/champions/en-us/';
 
 export const options = {
   method: 'GET',

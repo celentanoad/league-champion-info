@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import {baseURL, options} from './services';
+import {baseURLAll, options} from './services';
 import './App.css';
 import { Grommet, Box, Spinner, Header, Heading, Image } from 'grommet';
 import Search from './components/Search';
@@ -75,7 +75,7 @@ function App() {
 
   const [championList, setChampionList] = useState();
   const [isLoading, setIsLoading] = useState(false);
-  // const [hasError, setHasError] = useState(false);
+  const [hasError, setHasError] = useState(false);
 
   const getDifficultyRange = (difficulty) => {
     if (difficulty === "easy") return [1, 3];
@@ -83,27 +83,32 @@ function App() {
     else return [7, 10];
   }
 
+  const handleErrors = (response) => {
+    if (!response.ok) throw Error(response.statusText)
+    return response;
+  }
+
   const getChampionList = async (difficulty, role) => {
-    // setHasError(false)
+    setHasError(false)
     setIsLoading(true)
     setChampionList()
-    let results = await fetch(`${baseURL}&role=${role}`, options)
+    let results = await fetch(`${baseURLAll}&role=${role}`, options)
+      .then(handleErrors)
       .then(res => res.json())
-      //   {
-      //   res.json()
-      //   if (!res.ok) return Promise.reject(res.status)
-      // })
+      .catch(err => {
+        console.error(err)
+        setHasError(true)
+        setIsLoading(false)
+      })
+
+    if (results) {
       let difficultyRange = getDifficultyRange(difficulty)
       let champions = results.champions.filter(
         champion => champion.node.difficulty >= difficultyRange[0] && champion.node.difficulty <= difficultyRange[1]
       )
       setChampionList(champions)
       setIsLoading(false)
-      .catch(err => {
-        console.error(err)
-        // setHasError(true)
-        // setIsLoading(false)
-      })
+    }
   }
 
   return (
@@ -122,7 +127,7 @@ function App() {
           <Search getChampionList={getChampionList}/>
           {isLoading && <Spinner />}
           {championList && <ChampionList championList={championList}/>}
-          {/* {hasError && <ErrorMessage />} */}
+          {hasError && <ErrorMessage />}
         </Box>
       </Box>
     </Grommet>
