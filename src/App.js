@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import {baseURLAll, options} from './services';
+import {baseURLAll, options, getAllChampions} from './services';
 import './App.css';
 import { Grommet, Box, Spinner, Header, Heading, Image } from 'grommet';
 import Search from './components/Search';
@@ -7,6 +7,7 @@ import ChampionList from './components/ChampionList';
 import ErrorMessage from './components/ErrorMessage';
 import theme from './theme'
 import logo from './assets/logoHeader.png'
+// import apiHook from "./hooks/apiHook";
 
 const jsonResponse = [
   {node : {
@@ -73,7 +74,7 @@ const jsonResponse = [
 
 function App() {
 
-  const [championList, setChampionList] = useState();
+  const [championList, setChampionList] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
 
@@ -92,7 +93,7 @@ function App() {
     setHasError(false)
     setIsLoading(true)
     setChampionList()
-    let results = await fetch(`${baseURLAll}&role=${role}`, options)
+    let results = await fetch(`${baseURLAll}${role}`, options)
       .then(handleErrors)
       .then(res => res.json())
       .catch(err => {
