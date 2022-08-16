@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Card, CardHeader, Heading } from "grommet";
+import { useState, useContext } from "react";
+import { Card, CardHeader, Heading, ResponsiveContext } from "grommet";
 import ChampionDetails from "./ChampionDetails";
 import ChampionBasic from "./ChampionBasic";
 import { baseURLOne, options } from "../services";
@@ -9,6 +9,8 @@ const Champion = ({ champion }) => {
   const [showDetails, setShowDetails] = useState(false);
   const [championDetails, setChampionDetails] = useState("");
   const [hasError, setHasError] = useState(false);
+
+  const size = useContext(ResponsiveContext)
 
   const imageURL = `url(${champion.node.champion_splash})`;
 
@@ -40,7 +42,13 @@ const Champion = ({ champion }) => {
 
   return (
   <>
-    <Card animation={{ type: "fadeIn", duration: 2000 }} background={ showDetails ? { image: imageURL, opacity: "medium" } : "light-4" } border={{ color: "light-4", size: "large" }} onClick={handleClick}>
+    <Card 
+      animation={{ type: "fadeIn", duration: 2000 }} 
+      background={ showDetails ? { image: imageURL, opacity: "medium" } : "light-4" } 
+      border={{ color: "light-4", size: "large" }} 
+      onClick={handleClick}
+      className={ size === "small" ? "mobile-image" : ""}
+      >
       <CardHeader alignSelf="center">
         <Heading level="2" margin="small">
           {champion.node.champion_name}
