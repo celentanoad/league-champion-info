@@ -1,5 +1,5 @@
-import { useState, useContext } from "react";
-import { Card, CardHeader, Heading, ResponsiveContext } from "grommet";
+import { useState } from "react";
+import { Card, CardHeader, Heading } from "grommet";
 import ChampionDetails from "./ChampionDetails";
 import ChampionBasic from "./ChampionBasic";
 import { baseURLOne, options } from "../services";
@@ -9,8 +9,6 @@ const Champion = ({ champion }) => {
   const [showDetails, setShowDetails] = useState(false);
   const [championDetails, setChampionDetails] = useState("");
   const [hasError, setHasError] = useState(false);
-
-  const size = useContext(ResponsiveContext)
 
   const imageURL = `url(${champion.node.champion_splash})`;
 
