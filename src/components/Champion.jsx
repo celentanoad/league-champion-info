@@ -47,7 +47,6 @@ const Champion = ({ champion }) => {
       background={ showDetails ? { image: imageURL, opacity: "medium" } : "light-4" } 
       border={{ color: "light-4", size: "large" }} 
       onClick={handleClick}
-      className={ size === "small" ? "mobile-image" : ""}
       >
       <CardHeader alignSelf="center">
         <Heading level="2" margin="small">

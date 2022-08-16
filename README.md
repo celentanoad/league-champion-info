@@ -25,6 +25,7 @@ https://lol-champion-finder.netlify.app/
 - Display additional champion info
 - Set up API calls in separate services file
 - Encorporate reusable custom API hook
+- Fix Mobile image display
 
 ## Credits
 - Grommet Component Library: https://v2.grommet.io/
